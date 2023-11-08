@@ -5,14 +5,14 @@ use minigrep::Config;
 fn main() {
     let args: Vec<String> = env::args().collect();
     let config = Config::build(&args).unwrap_or_else(|err| {
-        println!("Error when building config: {}", err);
+        eprintln!("Error when building config: {}", err);
         process::exit(1);
     });
 
     println!("Searching for {}", config.query);
     println!("In {}", config.file_path);
     if let Err(e) = minigrep::run(config) {
-        println!("Application error {}", e);
+        eprintln!("Application error {}", e);
         process::exit(1);
     }
 }
